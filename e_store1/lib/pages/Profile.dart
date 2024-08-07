@@ -89,7 +89,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff2f2f2),
+      backgroundColor: Color(0xffecefe8),
       body: name == null
           ? Center(child: CircularProgressIndicator())
           : Padding(

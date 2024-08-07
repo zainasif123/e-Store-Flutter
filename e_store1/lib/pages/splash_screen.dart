@@ -5,6 +5,7 @@ import 'package:e_store1/pages/bottomnav.dart';
 import 'package:e_store1/services/SharedPreferance.dart';
 import 'package:e_store1/pages/login.dart';
 import 'package:e_store1/pages/onboarding.dart';
+import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -17,7 +18,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _checkLoginStatus();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    Timer(Duration(seconds: 5), _checkLoginStatus);
   }
 
   void _checkLoginStatus() async {
@@ -59,8 +64,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
-        child: CircularProgressIndicator(),
+        child:
+            Image.asset('images/splash.png'), // Replace with your image asset
       ),
     );
   }

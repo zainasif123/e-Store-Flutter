@@ -81,7 +81,7 @@ class _OrderReceivedState extends State<OrderReceived> {
                         margin: EdgeInsets.all(10),
                         child: Container(
                           padding: EdgeInsets.all(8.0),
-                          height: 200, // Adjust height if needed
+                          height: 250, // Adjust height if needed
                           child: Row(
                             children: [
                               ClipRRect(

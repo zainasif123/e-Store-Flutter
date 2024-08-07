@@ -8,7 +8,7 @@ Here's the updated README with the image link added:
 
 Welcome to the e-Store App project! This application is designed to streamline the selling of computer accessories for a local electronics shop. It provides a comprehensive solution with distinct interfaces for both clients and administrators, ensuring a seamless and efficient experience for all users.
 
-![Demo](images/demo.png)
+![Demo](https://github.com/zainasif123/e-Store-Flutter/blob/main/e_store1/images/demo.png)
 
 ## Key Features
 

@@ -13,6 +13,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool _isloading = false;
   late String image;
   String name = '', password = '', email = '';
   bool _isPasswordVisible = false;
@@ -28,11 +29,17 @@ class _LoginState extends State<Login> {
 
   void login() async {
     try {
+      setState(() {
+        _isloading = true;
+      });
       FirebaseAuth auth = FirebaseAuth.instance;
       UserCredential userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       await SaveUserDataLocal().saveUserEmail(emailcontroller.text);
       await SaveUserDataLocal().saveUserPassword(passwordcontroller.text);
+      setState(() {
+        _isloading = false;
+      });
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => BottomNav()));
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -45,10 +52,19 @@ class _LoginState extends State<Login> {
     } on FirebaseException catch (e) {
       String message;
       if (e.code == 'wrong-password') {
+        setState(() {
+          _isloading = false;
+        });
         message = "Password provided is incorrect";
       } else if (e.code == 'user-not-found') {
+        setState(() {
+          _isloading = false;
+        });
         message = "No user found for this email";
       } else {
+        setState(() {
+          _isloading = false;
+        });
         message = "Login failed. Please check your credentials.";
       }
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -209,14 +225,16 @@ class _LoginState extends State<Login> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
-                          child: Text(
-                            "LOGIN",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: _isloading
+                              ? CircularProgressIndicator()
+                              : Text(
+                                  "LOGIN",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

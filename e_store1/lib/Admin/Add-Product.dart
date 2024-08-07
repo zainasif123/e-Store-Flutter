@@ -80,7 +80,9 @@ class _AddProductState extends State<AddProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f2),
       appBar: AppBar(
+        backgroundColor: Color(0xfff2f2f2),
         centerTitle: true,
         leading: GestureDetector(
             onTap: () {

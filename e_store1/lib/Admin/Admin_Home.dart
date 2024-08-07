@@ -4,6 +4,8 @@ import 'package:e_store1/widget/support_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'Order.dart';
+
 class AdminHome extends StatefulWidget {
   const AdminHome({super.key});
 
@@ -18,6 +20,14 @@ class _AdminHomeState extends State<AdminHome> {
         MaterialPageRoute(
             builder: (BuildContext context) =>
                 AddProduct())); // Adjust the route name as needed
+  }
+
+  void _deleiveryStatus() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (BuildContext context) =>
+                OrderReceived())); // Adjust the route name as needed
   }
 
   // Delete user account
@@ -58,10 +68,16 @@ class _AdminHomeState extends State<AdminHome> {
             _buildProfileOption(
               icon: Icons.add,
               title: "Add Product",
-              value: 'Sure about logout? ',
+              value: ' ',
               onTap: _addProduct,
             ),
             SizedBox(height: 10),
+            _buildProfileOption(
+              icon: Icons.shopping_cart_outlined,
+              title: "delivering Status",
+              value: '',
+              onTap: _deleiveryStatus,
+            ),
           ],
         ),
       ),

@@ -44,7 +44,9 @@ class _OnboardingState extends State<Onboarding> {
                     });
 
                     await SaveUserDataLocal().saveOnboardingStatus(true);
-                    _isloading = false;
+                    setState(() {
+                      _isloading = false;
+                    });
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

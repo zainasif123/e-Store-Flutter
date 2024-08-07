@@ -16,6 +16,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool _isloading = false;
   late String image;
   String? name, password, email;
   bool _isPasswordVisible = false;
@@ -27,12 +28,13 @@ class _SignUpState extends State<SignUp> {
   void register() async {
     if (name != null && email != null && password != null) {
       try {
+        setState(() {
+          _isloading = true;
+        });
         FirebaseAuth auth = FirebaseAuth.instance;
         UserCredential userCredential = await auth
             .createUserWithEmailAndPassword(email: email!, password: password!);
 
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => BottomNav()));
         //String id = randomAlphaNumeric(10);
         String generatedUid = userCredential.user!.uid;
         //store data locally in shared preferences
@@ -52,7 +54,11 @@ class _SignUpState extends State<SignUp> {
         };
         //store data in firestore
         DatabaseMethod().addUserInfo(userinfo, generatedUid);
-
+        setState(() {
+          _isloading = false;
+        });
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (BuildContext context) => BottomNav()));
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.green,
           content: Text(
@@ -62,6 +68,9 @@ class _SignUpState extends State<SignUp> {
         ));
       } on FirebaseException catch (e) {
         if (e.code == 'weak-password') {
+          setState(() {
+            _isloading = false;
+          });
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
             content: Text(
@@ -70,6 +79,9 @@ class _SignUpState extends State<SignUp> {
             ),
           ));
         } else if (e.code == 'email-already-in-use') {
+          setState(() {
+            _isloading = false;
+          });
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.red,
             content: Text(
@@ -270,14 +282,16 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(
-                          child: Text(
-                            "SIGN UP",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: _isloading
+                              ? CircularProgressIndicator()
+                              : Text(
+                                  "SIGN UP",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

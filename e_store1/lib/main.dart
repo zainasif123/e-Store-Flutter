@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:e_store1/Admin/Admin_logion.dart';
+import 'package:e_store1/Admin/Order.dart';
 import 'package:e_store1/pages/bottomnav.dart';
 import 'package:e_store1/pages/home.dart';
 import 'package:e_store1/pages/login.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: AdminLogin(),
     );
   }
 }

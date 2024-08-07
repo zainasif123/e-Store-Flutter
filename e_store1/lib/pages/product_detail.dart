@@ -162,13 +162,15 @@ class _ProductDetailState extends State<ProductDetail> {
                                 borderRadius: BorderRadius.circular(10)),
                             width: MediaQuery.of(context).size.width,
                             child: Center(
-                              child: Text(
-                                "Buy Now",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              child: _isLoading
+                                  ? CircularProgressIndicator()
+                                  : Text(
+                                      "Buy Now",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                             ),
                           ),
                         )
@@ -179,10 +181,10 @@ class _ProductDetailState extends State<ProductDetail> {
               ],
             ),
           ),
-          if (_isLoading)
-            Center(
-              child: CircularProgressIndicator(),
-            ),
+          // if (_isLoading)
+          //   Center(
+          //     child: CircularProgressIndicator(),
+          //   ),
         ],
       ),
     );

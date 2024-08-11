@@ -86,7 +86,3 @@ For any questions or collaboration inquiries, feel free to reach out to me via [
 ---
 
 **Hashtags:** #FlutterDev #Ecommerce #MobileAppDevelopment #Firebase #StripePayments #StateManagement #UIUXDesign #TechInnovation
-
----
-
-Make sure the image file `demo.png` is in the `images` folder in your GitHub repository. If the image is named differently or in a different folder, adjust the path accordingly.
